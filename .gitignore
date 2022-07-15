@@ -1,2 +1,5 @@
 # Ignore VSCODE user setup
 .vscode 
+
+# Ignore Object files
+src/*.o

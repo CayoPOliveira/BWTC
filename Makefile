@@ -2,7 +2,7 @@
 PROJ_LABEL = BWT
 
 # Main code source
-C_SRC = src/main.c
+CSRC = main.c
 
 # Files of lib
 LIB = lib/*.h
@@ -10,15 +10,25 @@ LIB = lib/*.h
 SRC = src/*.c
 
 # Object Files
-OBJ = $(SRC: .c = .o)
+OBJ = $(SRC: src/%.c = obj/%.o)
 
 # Compiler
 CC = gcc
 
 # Compile Flags
-CC_FLAGS = 	-Wall\
- 						-Werror
+CFLAGS = 	-Wall\
+ 					-Werror
 						
 VALGRIND_FLAGS = 	-g\
 									-O0
 
+all: ${PROJ_LABEL}
+
+${PROJ_LABEL}: ${OBJ} ${LIB} ${SRC} ${CSRC}
+	${CC} ${CFLAGS} ${CSRC} $< -o $@
+
+obj/%.o: src/%.c lib/%.h
+	${CC} $< -o $@
+
+clean:
+	rm -rf obj/*.o 

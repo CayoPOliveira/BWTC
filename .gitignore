@@ -2,4 +2,4 @@
 .vscode 
 
 # Ignore Object files
-src/*.o
+obj/*

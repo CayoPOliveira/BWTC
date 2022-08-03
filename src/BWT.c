@@ -41,4 +41,7 @@ void BWT_Inverse_Construct(str_t *BWT, str_t *Str, uint_t N, uint_t Sigma)
     j = LF[j];
     Str[i] = BWT[j];
   }
+
+  free(Count);
+  free(LF);
 }

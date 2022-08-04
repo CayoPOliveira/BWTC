@@ -5,12 +5,12 @@ PROJ_LABEL = BWT
 CSRC = main.c
 
 # Files of lib
-LIB = lib/*.h
+LIB = $(wildcard lib/*.h)
 # Files of src
-SRC = src/*.c
+SRC = $(wildcard src/*.c)
 
 # Object Files
-OBJ = $(SRC: src/%.c = obj/%.o)
+OBJ = $(patsubst src/%.c, obj/%.o,$(SRC) )
 
 # Compiler
 CC = gcc
@@ -18,7 +18,7 @@ CC = gcc
 # Compile Flags
 CFLAGS = 	-Wall\
  					-Werror
-						
+					
 VALGRIND_FLAGS = 	-g\
 									-O0
 
@@ -28,7 +28,11 @@ ${PROJ_LABEL}: ${OBJ} ${LIB} ${SRC} ${CSRC}
 	${CC} ${CFLAGS} ${CSRC} $< -o $@
 
 obj/%.o: src/%.c lib/%.h
-	${CC} $< -o $@
-
+	${CC} $< -c -I/lib/
+	mv *.o obj/
 clean:
-	rm -rf obj/*.o 
+	rm -rf obj/*.o ${PROJ_LABEL}
+
+teste_obj:
+	touch ${SRC}
+	touch ${OBJ}

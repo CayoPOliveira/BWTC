@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "DC3.h"
+#include "../lib/DC3.h"
 
 int_lcp *segtreeBuild(int_lcp V[], int_t n)
 {

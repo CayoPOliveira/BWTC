@@ -10,7 +10,7 @@ LIB = $(wildcard lib/*.h)
 SRC = $(wildcard src/*.c)
 
 # Object Files
-OBJ = $(patsubst src/%.c, obj/%.o,$(SRC) )
+OBJ = $(patsubst src/%.c, obj/%.o, $(SRC) )
 
 # Compiler
 CC = gcc
@@ -25,11 +25,11 @@ VALGRIND_FLAGS = 	-g\
 all: ${PROJ_LABEL}
 
 ${PROJ_LABEL}: ${OBJ} ${LIB} ${SRC} ${CSRC}
-	${CC} ${CFLAGS} ${CSRC} $< -o $@
+	${CC} ${CFLAGS} ${CSRC} ${OBJ} -o $@
 
 obj/%.o: src/%.c lib/%.h
-	${CC} $< -c -I/lib/
-	mv *.o obj/
+	${CC} $< -c -o $@
+
 clean:
 	rm -rf obj/*.o ${PROJ_LABEL}
 

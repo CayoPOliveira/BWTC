@@ -1,18 +1,23 @@
-#include "BWT.h"
+#include "../lib/BWT.h"
 #include <stdlib.h>
 
 void BWT_Construct(str_t *Str, str_t *BWT, uint_t N)
 {
-  str_t *SA = (str_t *)malloc(N * sizeof(str_t));
+  int_str *Str_Aux = (int_str *)malloc(N * sizeof(int_str));
+  int_sa *SA = (int_sa *)malloc(N * sizeof(int_sa));
   for (uint_t i = 0; i < N; i++)
+  {
     SA[i] = 0;
-  DC3(Str, N, SA, 255);
+    Str_Aux[i] = (int_str)Str[i];
+  }
+  DC3(Str_Aux, N, SA, 255);
   for (uint_t i = 0; i < N; i++)
   {
     uint_t sai = SA[i];
     BWT[i] = (!sai ? (Str[N - 1]) : (Str[sai - 1]));
   }
   free(SA);
+  free(Str_Aux);
 }
 
 void BWT_Inverse_Construct(str_t *BWT, str_t *Str, uint_t N, uint_t Sigma)

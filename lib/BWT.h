@@ -3,7 +3,7 @@
 
 #include "DC3.h"
 
-typedef uint_t str_t;
+typedef char str_t;
 
 /*
   BWT_Construct() aplica a transformada de Burrows-Wheeller a um array e retorna o resultado;
